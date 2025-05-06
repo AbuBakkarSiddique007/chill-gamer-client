@@ -3,13 +3,16 @@ import { NavLink } from 'react-router-dom';
 
 const Navbar = () => {
 
+    const navLinkClass = ({ isActive }) => isActive ? "text-blue-500 font-bold" : "";
+
     const list = <>
-        <li><NavLink to="/" activeClassName="text-blue-500">Home</NavLink></li>
-        <li><NavLink to="/all-reviews" activeClassName="text-blue-500">All Reviews</NavLink></li>
-        <li><NavLink to="/add-review" activeClassName="text-blue-500">Add Review</NavLink></li>
-        <li><NavLink to="/my-review" activeClassName="text-blue-500">My Review</NavLink></li>
-        <li><NavLink to="/game-watchlist" activeClassName="text-blue-500">Game WatchList</NavLink></li>
+        <li><NavLink to="/" className={navLinkClass}>Home</NavLink></li>
+        <li><NavLink to="/all-reviews" className={navLinkClass}>All Reviews</NavLink></li>
+        <li><NavLink to="/add-review" className={navLinkClass}>Add Review</NavLink></li>
+        <li><NavLink to="/my-review" className={navLinkClass}>My Review</NavLink></li>
+        <li><NavLink to="/game-watchList" className={navLinkClass}>Game WatchList</NavLink></li>
     </>
+
 
     return (
         <div className='border-2 border-red-700 mb-5'>
@@ -27,7 +30,7 @@ const Navbar = () => {
                             }
                         </ul>
                     </div>
-                    <a className="btn btn-ghost text-xl">GameInsight </a>
+                    <a className="btn btn-ghost text-xl">Chill Gamer</a>
                 </div>
                 <div className="navbar-center hidden lg:flex">
                     <ul className="menu menu-horizontal px-1">
