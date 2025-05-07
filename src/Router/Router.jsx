@@ -7,6 +7,7 @@ import MyReview from "../components/Pages/MyReview";
 import GameWatchList from "../components/Pages/GameWatchList";
 import H from "../components/Home/Home";
 import Home from "../components/Home/Home";
+import ReviewDetails from "../components/Pages/ReviewDetails";
 
 export const router = createBrowserRouter([
     {
@@ -14,7 +15,8 @@ export const router = createBrowserRouter([
         element: <RootLayout />,
         errorElement: <ErrorPage />,
         children: [
-            {path: "/",
+            {
+                path: "/",
                 element: <Home></Home>
             },
             {
@@ -24,6 +26,7 @@ export const router = createBrowserRouter([
             {
                 path: "/all-reviews",
                 element: <AllReviews></AllReviews>,
+                loader: () => fetch("http://localhost:5000/reviews")
             },
             {
                 path: "/my-review",
@@ -32,6 +35,11 @@ export const router = createBrowserRouter([
             {
                 path: "/game-watchList",
                 element: <GameWatchList></GameWatchList>,
+            },
+            {
+                path: "review/:id",
+                element: <ReviewDetails></ReviewDetails>,
+                loader: ({ params }) => fetch(`http://localhost:5000/reviews/${params.id}`)
             }
         ],
     }
