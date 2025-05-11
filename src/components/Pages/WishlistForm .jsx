@@ -25,19 +25,19 @@ const WishlistForm = () => {
     };
 
     return (
-        <section className="bg-slate-800 text-white py-24 px-6 text-center">
+        <section className="bg-slate-800 text-white py-24 px-6">
             <div className="max-w-xl mx-auto px-4">
-                <h2 className="text-3xl font-bold text-center mb-6">
+                <h2 className="text-3xl font-bold text-center mb-6 text-white">
                     Suggest a Game to Review
                 </h2>
-                <form onSubmit={handleSubmit} className="space-y-4">
+                <form onSubmit={handleSubmit} className="space-y-6">
                     <input
                         name="title"
                         type="text"
                         placeholder="Game Title"
                         value={formData.title}
                         onChange={handleChange}
-                        className="w-full border p-2 rounded-lg"
+                        className="w-full bg-slate-100 text-gray-800 border border-gray-300 p-4 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-600 shadow-md transition duration-300"
                         required
                     />
                     <input
@@ -46,7 +46,7 @@ const WishlistForm = () => {
                         placeholder="Genre"
                         value={formData.genre}
                         onChange={handleChange}
-                        className="w-full border p-2 rounded-lg"
+                        className="w-full bg-slate-100 text-gray-800 border border-gray-300 p-4 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-600 shadow-md transition duration-300"
                     />
                     <input
                         name="year"
@@ -54,7 +54,7 @@ const WishlistForm = () => {
                         placeholder="Expected Release Year"
                         value={formData.year}
                         onChange={handleChange}
-                        className="w-full border p-2 rounded-lg"
+                        className="w-full bg-slate-100 text-gray-800 border border-gray-300 p-4 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-600 shadow-md transition duration-300"
                     />
                     <input
                         name="userEmail"
@@ -62,11 +62,11 @@ const WishlistForm = () => {
                         placeholder="Your Email (optional)"
                         value={formData.userEmail}
                         onChange={handleChange}
-                        className="w-full border p-2 rounded-lg"
+                        className="w-full bg-slate-100 text-gray-800 border border-gray-300 p-4 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-600 shadow-md transition duration-300"
                     />
                     <button
                         type="submit"
-                        className="bg-blue-600 text-white w-full p-2 rounded-lg hover:bg-blue-700"
+                        className="bg-blue-600 text-white w-full p-4 rounded-lg hover:bg-blue-700 transition duration-300 focus:outline-none focus:ring-2 focus:ring-blue-600"
                     >
                         Submit Suggestion
                     </button>
