@@ -1,6 +1,18 @@
-import React from 'react';
+import React, { useContext, useState, useEffect } from 'react';
+import { AuthContext } from '../Authentication/AuthProvider/AuthProvider';
 
 const AddReview = () => {
+    const { user } = useContext(AuthContext);
+    const [error, setError] = useState("");
+    const [loading, setLoading] = useState(true);  
+
+
+    useEffect(() => {
+        if (user) {
+            setLoading(false);  
+        }
+    }, [user]);
+
     const handleSubmit = (e) => {
         e.preventDefault();
 
@@ -13,6 +25,11 @@ const AddReview = () => {
         const genre = form.genre.value;
         const userName = form.userName.value;
         const userEmail = form.userEmail.value;
+
+        if (!user) {
+            setError("Please login to submit a review");
+            return;
+        }
 
         const review = {
             coverUrl,
@@ -37,14 +54,22 @@ const AddReview = () => {
             .then(res => res.json())
             .then(data => {
                 console.log(data);
-
-            })
-
+            });
     };
+
+
+    if (loading) {
+        return <p>Loading user data...</p>;
+    }
+
+    console.log(user);
+
 
     return (
         <div className="max-w-2xl mx-auto p-6 bg-white shadow-md rounded-lg">
             <h2 className="text-2xl font-semibold mb-4">Add New Game Review</h2>
+
+            {error && <p className="text-red-500">{error}</p>}
 
             <form onSubmit={handleSubmit} className="space-y-4">
 
@@ -92,8 +117,9 @@ const AddReview = () => {
                         <input
                             type="text"
                             name="userName"
-
                             className="input input-bordered w-full"
+                            defaultValue={user?.displayName || ''} 
+                            disabled
                         />
                     </div>
                     <div>
@@ -102,6 +128,8 @@ const AddReview = () => {
                             type="email"
                             name="userEmail"
                             className="input input-bordered w-full"
+                            defaultValue={user?.email || ''}
+                            disabled
                         />
                     </div>
                 </div>

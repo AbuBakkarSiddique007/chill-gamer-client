@@ -3,11 +3,14 @@ import ErrorPage from "../components/Pages/ErrorPage";
 import RootLayout from "../components/RootLayout/RootLayout";
 import AddReview from "../components/Pages/AddReview";
 import AllReviews from "../components/Pages/AllReviews";
-import MyReview from "../components/Pages/MyReview";
-import GameWatchList from "../components/Pages/GameWatchList";
-import H from "../components/Home/Home";
 import Home from "../components/Home/Home";
 import ReviewDetails from "../components/Pages/ReviewDetails";
+import Register from "../components/Authentication/Register/Register";
+import Login from "../components/Authentication/Login/Login";
+import PrivateRoute from "../components/Authentication/PrivateRoute/PrivateRoute";
+import MyReviews from "../components/Pages/MyReviews";
+import UpdateReview from "../components/Pages/UpdateReview";
+import WatchList from "../components/Pages/WatchList";
 
 export const router = createBrowserRouter([
     {
@@ -21,7 +24,11 @@ export const router = createBrowserRouter([
             },
             {
                 path: "/add-review",
-                element: <AddReview />,
+                element: (
+                    <PrivateRoute>
+                        <AddReview></AddReview>
+                    </PrivateRoute>
+                ),
             },
             {
                 path: "/all-reviews",
@@ -30,16 +37,52 @@ export const router = createBrowserRouter([
             },
             {
                 path: "/my-review",
-                element: <MyReview></MyReview>,
+                element: (
+                    <PrivateRoute>
+                        <MyReviews></MyReviews>
+                    </PrivateRoute>
+                ),
             },
+
             {
-                path: "/game-watchList",
-                element: <GameWatchList></GameWatchList>,
+                path: "/updateReview/:id",
+                element: (
+                    <PrivateRoute>
+                        <UpdateReview></UpdateReview>
+                    </PrivateRoute>
+                ),
             },
+
+
+            {
+                path: "/myWatchList",
+                element: (
+                    <PrivateRoute>
+                        <WatchList></WatchList>
+                    </PrivateRoute>
+                )
+            },
+
+
             {
                 path: "review/:id",
                 element: <ReviewDetails></ReviewDetails>,
-                loader: ({ params }) => fetch(`http://localhost:5000/reviews/${params.id}`)
+                loader: ({ params }) => fetch(`http://localhost:5000/review/${params.id}`)
+                    .then(res => res.json())
+                    .catch(error => {
+                        console.error('Error fetching review:', error);
+                        return null;
+                    })
+            },
+
+
+            {
+                path: "/register",
+                element: <Register></Register>
+            },
+            {
+                path: "/login",
+                element: <Login></Login>
             }
         ],
     }
