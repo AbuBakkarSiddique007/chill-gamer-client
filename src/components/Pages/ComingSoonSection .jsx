@@ -23,9 +23,9 @@ const comingSoonGames = [
 
 const ComingSoonSection = () => {
     return (
-        <section className="py-10 bg-gray-100">
+        <section className="bg-slate-800 py-20 px-4">
             <div className="max-w-6xl mx-auto px-4">
-                <h2 className="text-3xl font-bold mb-6 text-center">🎮 Coming Soon</h2>
+                <h2 className="text-3xl font-bold mb-6 text-center">Coming Soon</h2>
                 <div className="grid md:grid-cols-3 gap-6">
                     {comingSoonGames.map((game) => (
                         <div

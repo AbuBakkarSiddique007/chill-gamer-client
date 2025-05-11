@@ -5,7 +5,7 @@ import { AuthContext } from '../Authentication/AuthProvider/AuthProvider';
 const Navbar = () => {
     const { user, handleLogout } = useContext(AuthContext);
 
-    const navLinkClass = ({ isActive }) => isActive ? "text-blue-500 font-bold" : "";
+    const navLinkClass = ({ isActive }) => isActive ? "text-blue-500 font-bold" : "hover:text-[#7c3aed] transition";
 
     const navLinks = <>
         <li><NavLink to="/" className={navLinkClass}>Home</NavLink></li>
@@ -25,8 +25,8 @@ const Navbar = () => {
 
 
     return (
-        <div className='border-2 border-red-700 mb-5'>
-            <div className="navbar bg-base-100 shadow-sm">
+        <div className='bg-[#0f172a] text-[#f8fafc] shadow-lg'>
+            <div className="navbar shadow-sm">
                 <div className="navbar-start">
                     <div className="dropdown">
                         <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
@@ -34,7 +34,7 @@ const Navbar = () => {
                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h8m-8 6h16" />
                             </svg>
                         </div>
-                        <ul tabIndex={0} className="menu menu-sm dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52">
+                        <ul tabIndex={0} className="menu menu-sm dropdown-content mt-3 p-2 shadow bg-[#0f172a] text-[#f8fafc]  rounded-box w-52">
                             {navLinks}
                         </ul>
                     </div>
@@ -64,6 +64,8 @@ const Navbar = () => {
                             <Link to="/register" className="btn btn-secondary">Register</Link>
                         </>
                     )}
+
+                    
                 </div>
             </div>
         </div>

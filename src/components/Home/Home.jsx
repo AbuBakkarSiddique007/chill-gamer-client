@@ -11,7 +11,7 @@ const Home = () => {
             <TopRatedGames></TopRatedGames>
             <ComingSoonSection></ComingSoonSection>
             <WishlistForm></WishlistForm>
-            <Footer></Footer>
+            {/* <Footer></Footer> */}
         </div>
     );
 };

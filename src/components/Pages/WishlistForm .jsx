@@ -25,10 +25,10 @@ const WishlistForm = () => {
     };
 
     return (
-        <section className="py-10 bg-blue-50 ">
+        <section className="bg-slate-800 text-white py-24 px-6 text-center">
             <div className="max-w-xl mx-auto px-4">
-                <h2 className="text-2xl font-bold text-center mb-6">
-                    📥 Suggest a Game to Review
+                <h2 className="text-3xl font-bold text-center mb-6">
+                    Suggest a Game to Review
                 </h2>
                 <form onSubmit={handleSubmit} className="space-y-4">
                     <input

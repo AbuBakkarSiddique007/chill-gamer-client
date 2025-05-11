@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { AuthContext } from "../Authentication/AuthProvider/AuthProvider";
 
 const MyReviews = () => {
-    const { user } = useContext(AuthContext)
+    const { user } = useContext(AuthContext);
     const [reviews, setReviews] = useState([]);
     const [loading, setLoading] = useState(true);
 
@@ -38,52 +38,56 @@ const MyReviews = () => {
         }
     };
 
-    if (loading) return <p className="text-center">Loading...</p>;
+    if (loading) return <p className="text-center text-white mt-8">Loading...</p>;
 
     return (
-        <div className="max-w-5xl mx-auto p-4">
-            <h2 className="text-2xl font-bold mb-4">My Reviews</h2>
+        <div className="min-h-screen bg-slate-900 py-12 px-4">
+            <div className="max-w-5xl mx-auto bg-slate-800 p-8 rounded-xl shadow-lg text-white">
+                <h1 className="text-4xl font-bold text-center mb-8 text-blue-400">My Game Reviews</h1>
 
-           
-            {reviews.length === 0 ? (
-                <p className="text-center text-gray-500">You don't have any reviews yet. Start by adding one!</p>
-            ) : (
-                <div className="overflow-x-auto">
-                    <table className="table w-full border">
-                        <thead>
-                            <tr>
-                                <th>Title</th>
-                                <th>Rating</th>
-                                <th>Year</th>
-                                <th>Actions</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {reviews.map((review) => (
-                                <tr key={review._id}>
-                                    <td>{review.title}</td>
-                                    <td>{review.rating}</td>
-                                    <td>{review.year}</td>
-                                    <td>
-                                        <Link
-                                            to={`/updateReview/${review._id}`}
-                                            className="btn btn-sm btn-warning mr-2"
-                                        >
-                                            Update
-                                        </Link>
-                                        <button
-                                            onClick={() => handleDelete(review._id)}
-                                            className="btn btn-sm btn-error"
-                                        >
-                                            Delete
-                                        </button>
-                                    </td>
+                {reviews.length === 0 ? (
+                    <p className="text-center text-gray-400 text-lg">
+                        You don't have any reviews yet. <br />
+                        <Link to="/add-review" className="text-blue-400 hover:underline">Add one now!</Link>
+                    </p>
+                ) : (
+                    <div className="overflow-x-auto">
+                        <table className="table w-full text-white border border-slate-700">
+                            <thead className="bg-gradient-to-r from-blue-600 to-purple-600 text-white">
+                                <tr>
+                                    <th className="py-3 px-4 text-left">Title</th>
+                                    <th className="py-3 px-4 text-left">Rating</th>
+                                    <th className="py-3 px-4 text-left">Year</th>
+                                    <th className="py-3 px-4 text-left">Actions</th>
                                 </tr>
-                            ))}
-                        </tbody>
-                    </table>
-                </div>
-            )}
+                            </thead>
+                            <tbody>
+                                {reviews.map((review) => (
+                                    <tr key={review._id} className="hover:bg-slate-700 transition duration-200">
+                                        <td className="py-3 px-4">{review.title}</td>
+                                        <td className="py-3 px-4">{review.rating}</td>
+                                        <td className="py-3 px-4">{review.year}</td>
+                                        <td className="py-3 px-4">
+                                            <Link
+                                                to={`/updateReview/${review._id}`}
+                                                className="btn btn-sm bg-yellow-400 text-black hover:bg-yellow-300 mr-2"
+                                            >
+                                                Update
+                                            </Link>
+                                            <button
+                                                onClick={() => handleDelete(review._id)}
+                                                className="btn btn-sm bg-red-500 hover:bg-red-600 text-white"
+                                            >
+                                                Delete
+                                            </button>
+                                        </td>
+                                    </tr>
+                                ))}
+                            </tbody>
+                        </table>
+                    </div>
+                )}
+            </div>
         </div>
     );
 };

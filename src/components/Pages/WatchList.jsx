@@ -2,7 +2,7 @@ import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../Authentication/AuthProvider/AuthProvider";
 
 const WatchList = () => {
-    const { user } = useContext(AuthContext)
+    const { user } = useContext(AuthContext);
     const [watchList, setWatchList] = useState([]);
     const [loading, setLoading] = useState(true);
 
@@ -36,26 +36,34 @@ const WatchList = () => {
             });
     };
 
-    if (loading) return <p className="text-center mt-10">Loading WatchList...</p>;
+    if (loading) return <p className="text-center text-gray-300 mt-10">Loading WatchList...</p>;
 
     return (
-        <div className="p-6 max-w-4xl mx-auto">
-            <h2 className="text-3xl font-bold text-center mb-6">My Game WatchList</h2>
+        <div className="p-6 mx-auto bg-slate-800 min-h-screen">
+            <h2 className="text-4xl font-bold text-center text-white mb-8">My Game WatchList</h2>
+
             {watchList.length === 0 ? (
-                <p className="text-center text-gray-500">No games in your WatchList yet.</p>
+                <p className="text-center text-gray-400">No games in your WatchList yet.</p>
             ) : (
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
                     {watchList.map(item => (
-                        <div key={item._id} className="bg-white rounded-lg shadow-md overflow-hidden">
-                            <img src={item.coverUrl} alt={item.title} className="w-full aspect-[16/9]" />
-                            <div className="p-4 space-y-2">
+                        <div
+                            key={item._id}
+                            className="bg-slate-700 text-white rounded-xl shadow-lg hover:shadow-xl transition duration-300"
+                        >
+                            <img
+                                src={item.coverUrl}
+                                alt={item.title}
+                                className="w-full h-48 object-cover"
+                            />
+                            <div className="p-5 space-y-2">
                                 <h3 className="text-xl font-semibold">{item.title}</h3>
-                                <p className="text-sm text-gray-600">Genre: {item.genre}</p>
-                                <p className="text-sm text-gray-600">Rating: ⭐ {item.rating}</p>
-                                <p className="text-sm text-gray-500">Year: {item.year}</p>
+                                <p className="text-sm text-gray-300">🎮 Genre: {item.genre}</p>
+                                <p className="text-sm text-gray-300">⭐ Rating: {item.rating}</p>
+                                <p className="text-sm text-gray-400">📅 Year: {item.year}</p>
                                 <button
                                     onClick={() => deleteWatchListItem(item._id)}
-                                    className="text-red-500 mt-2"
+                                    className="mt-3 inline-block bg-red-600 hover:bg-red-700 text-white text-sm px-4 py-2 rounded-md transition"
                                 >
                                     Remove from WatchList
                                 </button>

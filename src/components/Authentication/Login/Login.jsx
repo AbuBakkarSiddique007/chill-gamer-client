@@ -102,11 +102,11 @@ const Login = () => {
     };
 
     return (
-        <div className="flex flex-col items-center justify-center min-h-screen py-12 bg-gray-100 px-6">
-            <div className="max-w-md w-full bg-white p-6 rounded-lg shadow-lg">
+        <div className="flex flex-col items-center justify-center min-h-screen bg-slate-800 px-6 py-8">
+            <div className="max-w-md w-full bg-white p-8 rounded-lg shadow-xl space-y-6">
                 <form onSubmit={handleLoginForm} className="space-y-4">
-                    <fieldset className="p-4 border rounded-lg space-y-4">
-                        <legend className="text-xl font-semibold text-gray-900 px-2">
+                    <fieldset className="space-y-4">
+                        <legend className="text-xl font-semibold text-gray-900 text-center">
                             Login to Your Account
                         </legend>
 
@@ -114,25 +114,23 @@ const Login = () => {
                             type="email"
                             name="email"
                             placeholder="Email Address"
-                            className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400 text-gray-900"
+                            className="w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400 text-gray-900"
                             required
                         />
 
-                        <div className="relative">
-                            <input
-                                type="password"
-                                name="password"
-                                placeholder="Password"
-                                className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400 text-gray-900"
-                                required
-                            />
-                        </div>
+                        <input
+                            type="password"
+                            name="password"
+                            placeholder="Password"
+                            className="w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400 text-gray-900"
+                            required
+                        />
 
-                        {error && <p className="text-red-500 text-sm">{error}</p>}
+                        {error && <p className="text-red-500 text-sm text-center">{error}</p>}
 
                         <button
                             type="submit"
-                            className="w-full bg-blue-500 text-white font-semibold py-2 rounded-lg hover:bg-blue-600 transition"
+                            className="w-full bg-blue-500 text-white font-semibold py-3 rounded-lg hover:bg-blue-600 transition"
                             disabled={loading}
                         >
                             {loading ? "Logging in..." : "Login"}
@@ -144,14 +142,14 @@ const Login = () => {
 
                 <button
                     type="button"
-                    className="w-full flex items-center justify-center bg-red-500 text-white font-semibold py-2 rounded-lg hover:bg-red-600 transition"
+                    className="w-full flex items-center justify-center bg-red-500 text-white font-semibold py-3 rounded-lg hover:bg-red-600 transition"
                     onClick={handleGoogleSignIn}
                     disabled={loading}
                 >
                     <FaGoogle className="mr-2" /> {loading ? "Signing in..." : "Login with Google"}
                 </button>
 
-                <div className="mt-4 text-center">
+                <div className="mt-6 text-center">
                     <p className="text-gray-600">
                         New to the website?{' '}
                         <NavLink to="/register" className="text-blue-500 font-semibold hover:underline">

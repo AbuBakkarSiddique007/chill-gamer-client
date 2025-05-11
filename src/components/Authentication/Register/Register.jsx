@@ -99,28 +99,35 @@ const Register = () => {
     };
 
     return (
-        <div className="flex flex-col items-center justify-center h-screen md:h-auto py-12 px-4 bg-gray-100">
-            <div className="max-w-md w-full bg-white p-6 rounded-lg shadow-lg">
+        <div className="flex flex-col items-center justify-center min-h-screen bg-slate-800 px-6 py-8">
+            <div className="max-w-lg w-full bg-white p-8 rounded-xl shadow-xl">
+                <h2 className="text-2xl font-bold text-center text-gray-800 mb-6">Create an Account</h2>
                 <form onSubmit={handleRegisterForm} className="space-y-4">
-                    <fieldset className="p-4 border border-gray-300 rounded-lg space-y-3">
-                        <legend className="text-xl font-semibold text-gray-900 px-2">Create an Account</legend>
+                    <div>
+                        <input type="text" name="name" placeholder="Full Name" required className="w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-blue-500 text-gray-800" />
+                    </div>
+                    <div>
+                        <input type="text" name="image" placeholder="Profile Image URL" className="w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-blue-500 text-gray-800" />
+                    </div>
+                    <div>
+                        <input type="email" name="email" placeholder="Email Address" required className="w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-blue-500 text-gray-800" />
+                    </div>
+                    <div>
+                        <input type="password" name="password" placeholder="Password" required className="w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-blue-500 text-gray-800" />
+                    </div>
+                    <div>
+                        <input type="password" name="confirmPassword" placeholder="Confirm Password" required className="w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-blue-500 text-gray-800" />
+                    </div>
 
-                        <input type="text" name="name" placeholder="Full Name" required className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-400 text-gray-900 mt-2" />
-                        <input type="text" name="image" placeholder="Profile Image URL" className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-400 text-gray-900" />
-                        <input type="email" name="email" placeholder="Email Address" required className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-400 text-gray-900" />
-                        <input type="password" name="password" placeholder="Password" required className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-400 text-gray-900" />
-                        <input type="password" name="confirmPassword" placeholder="Confirm Password" required className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-400 text-gray-900" />
+                    {error && <p className="text-red-500 text-sm mt-2">{error}</p>}
 
-                        {error && <p className="text-red-500">{error}</p>}
-
-                        <button
-                            type="submit"
-                            className="w-full bg-blue-500 text-white font-semibold py-2 rounded-lg hover:bg-blue-600 transition mt-4 cursor-pointer"
-                            disabled={loading}
-                        >
-                            {loading ? "Registering..." : "Register"}
-                        </button>
-                    </fieldset>
+                    <button
+                        type="submit"
+                        className="w-full bg-blue-600 text-white font-semibold py-3 rounded-lg hover:bg-blue-700 transition duration-200"
+                        disabled={loading}
+                    >
+                        {loading ? "Registering..." : "Register"}
+                    </button>
                 </form>
 
                 <div className="text-center my-4 text-gray-500">OR</div>
@@ -128,13 +135,13 @@ const Register = () => {
                 <button
                     type="button"
                     onClick={handleGoogleSignIn}
-                    className="w-full bg-red-500 text-white font-semibold py-2 rounded-lg hover:bg-red-600 transition cursor-pointer"
+                    className="w-full bg-red-500 text-white font-semibold py-3 rounded-lg hover:bg-red-600 transition duration-200"
                 >
                     Sign in with Google
                 </button>
 
-                <p className="text-center mt-4">
-                    Already have an account? <Link to="/login" className="text-blue-500 hover:underline">Login here</Link>
+                <p className="text-center mt-6 text-gray-700">
+                    Already have an account? <Link to="/login" className="text-blue-600 hover:underline">Login here</Link>
                 </p>
             </div>
         </div>

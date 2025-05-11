@@ -8,10 +8,10 @@ const AllReviews = () => {
     console.log(loadedData);
 
     return (
-        <div className='max-w-11/12 mx-auto mb-10'>
-            <h1>
-                All Reviews Page content comes here : ${loadedData.length}
-            </h1>
+        <div className='mx-auto bg-gradient-to-r from-[#1e293b] to-[#0f172a] text-white py-20 px-4'>
+            <h2 className='text-3xl font-bold text-center mb-6'>All Reviews</h2>
+            <p className='text-center mb-6'>Explore the reviews of your favorite games and share your thoughts with the community.</p>
+            
 
             <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4'>
                 {

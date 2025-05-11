@@ -11,7 +11,7 @@ const ReviewCard = ({ review }) => {
     } = review;
 
     return (
-        <div className="max-w-sm bg-white rounded-2xl shadow-md overflow-hidden border border-gray-200 hover:shadow-xl transition duration-300">
+        <div className="bg-gradient-to-r from-[#1e293b] to-[#0f172a] text-white  rounded-2xl shadow-md overflow-hidden border  hover:shadow-xl transition duration-300">
             <img
                 src={coverUrl}
                 alt={title}
