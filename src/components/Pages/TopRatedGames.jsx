@@ -11,7 +11,7 @@ const TopRatedGames = () => {
     }, []);
 
     return (
-        <div className="max-w-7xl mx-auto my-10 px-4">
+        <div className="max-w-7xl mx-auto my-10 px-4 ">
             <h2 className="text-3xl font-bold text-center mb-6">🔥 Highest Rated Games</h2>
             <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
                 {topGames.map(game => (
