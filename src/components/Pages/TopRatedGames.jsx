@@ -11,18 +11,27 @@ const TopRatedGames = () => {
     }, []);
 
     return (
-        <div className="bg-slate-800  text-white py-20 px-4 mx-auto">
-            <h2 className="text-3xl font-bold text-center mb-6"> Highest Rated Games</h2>
-            <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+        <div className="bg-slate-800 text-white py-20 px-4 mx-auto">
+            <h2 className="text-3xl font-bold text-center text-white mb-10">
+                Highest Rated Games
+            </h2>
+            <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
                 {topGames.map(game => (
-                    <div key={game._id} className="bg-white rounded-lg shadow-md overflow-hidden">
-                        <img src={game.coverUrl} alt={game.title} className="w-full h-48 object-cover" />
-                        <div className="p-4">
-                            <h3 className="text-xl font-semibold mb-1">{game.title}</h3>
-                            <p className="text-sm text-gray-600">Genre: {game.genre}</p>
-                            <p className="text-sm text-gray-600">Rating: ⭐ {game.rating}</p>
+                    <div
+                        key={game._id}
+                        className="bg-slate-700 rounded-lg shadow-lg overflow-hidden transform transition duration-300 ease-in-out hover:scale-105"
+                    >
+                        <img
+                            src={game.coverUrl}
+                            alt={game.title}
+                            className="w-full h-48 object-contain rounded-t-lg"
+                        />
+                        <div className="p-6 flex flex-col justify-between">
+                            <h3 className="text-2xl font-semibold text-gray-100 mb-2">{game.title}</h3>
+                            <p className="text-sm text-gray-300 mb-2">Genre: {game.genre}</p>
+                            <p className="text-sm text-gray-300 mb-4">Rating: ⭐ {game.rating}</p>
                             <Link to={`/review/${game._id}`}>
-                                <button className="mt-3 px-4 py-1 bg-blue-600 text-white rounded hover:bg-blue-700">
+                                <button className="mt-4 px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition duration-300">
                                     Explore Details
                                 </button>
                             </Link>
