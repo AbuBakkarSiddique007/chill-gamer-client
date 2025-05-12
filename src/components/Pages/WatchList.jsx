@@ -1,4 +1,5 @@
 import { useContext, useEffect, useState } from "react";
+import Swal from "sweetalert2";
 import { AuthContext } from "../Authentication/AuthProvider/AuthProvider";
 
 const WatchList = () => {
@@ -22,18 +23,34 @@ const WatchList = () => {
     }, [user?.email]);
 
     const deleteWatchListItem = (id) => {
-        fetch(`http://localhost:5000/watchList/${id}`, {
-            method: "DELETE",
-        })
-            .then(res => res.json())
-            .then(() => {
-                setWatchList(prevWatchList => prevWatchList.filter(item => item._id !== id));
-                alert("Game removed from WatchList");
-            })
-            .catch(err => {
-                console.error("Error deleting from WatchList:", err);
-                alert("Failed to remove the game from WatchList");
-            });
+        Swal.fire({
+            title: "Are you sure?",
+            text: "This game will be removed from your WatchList.",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#d33",
+            cancelButtonColor: "#3085d6",
+            confirmButtonText: "Yes, remove it!"
+        }).then((result) => {
+            if (result.isConfirmed) {
+                fetch(`http://localhost:5000/watchList/${id}`, {
+                    method: "DELETE",
+                })
+                    .then(res => res.json())
+                    .then(() => {
+                        setWatchList(prevWatchList => prevWatchList.filter(item => item._id !== id));
+                        Swal.fire(
+                            "Removed!",
+                            "The game has been removed from your WatchList.",
+                            "success"
+                        );
+                    })
+                    .catch(err => {
+                        console.error("Error deleting from WatchList:", err);
+                        Swal.fire("Error!", "Failed to remove the game.", "error");
+                    });
+            }
+        });
     };
 
     if (loading) return <p className="text-center text-gray-300 mt-10">Loading WatchList...</p>;
@@ -45,31 +62,46 @@ const WatchList = () => {
             {watchList.length === 0 ? (
                 <p className="text-center text-gray-400">No games in your WatchList yet.</p>
             ) : (
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                    {watchList.map(item => (
-                        <div
-                            key={item._id}
-                            className="bg-slate-700 text-white rounded-xl shadow-lg hover:shadow-xl transition duration-300"
-                        >
-                            <img
-                                src={item.coverUrl}
-                                alt={item.title}
-                                className="w-full h-48 object-cover"
-                            />
-                            <div className="p-5 space-y-2">
-                                <h3 className="text-xl font-semibold">{item.title}</h3>
-                                <p className="text-sm text-gray-300">🎮 Genre: {item.genre}</p>
-                                <p className="text-sm text-gray-300">⭐ Rating: {item.rating}</p>
-                                <p className="text-sm text-gray-400">📅 Year: {item.year}</p>
-                                <button
-                                    onClick={() => deleteWatchListItem(item._id)}
-                                    className="mt-3 inline-block bg-red-600 hover:bg-red-700 text-white text-sm px-4 py-2 rounded-md transition"
-                                >
-                                    Remove from WatchList
-                                </button>
-                            </div>
-                        </div>
-                    ))}
+                <div className="overflow-x-auto">
+                    <table className="min-w-full table-auto bg-slate-700 rounded-xl overflow-hidden shadow-md">
+                        <thead className="bg-slate-600 text-white text-left">
+                            <tr>
+                                <th className="px-4 py-3">Cover</th>
+                                <th className="px-4 py-3">Title</th>
+                                <th className="px-4 py-3">Genre</th>
+                                <th className="px-4 py-3">Rating</th>
+                                <th className="px-4 py-3">Year</th>
+                                <th className="px-4 py-3">Email</th>
+                                <th className="px-4 py-3">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {watchList.map(item => (
+                                <tr key={item._id} className="border-t border-slate-600 hover:bg-slate-600 transition">
+                                    <td className="px-4 py-3">
+                                        <img
+                                            src={item.coverUrl}
+                                            alt={item.title}
+                                            className="w-20 h-12 object-cover rounded-md"
+                                        />
+                                    </td>
+                                    <td className="px-4 py-3 text-white">{item.title}</td>
+                                    <td className="px-4 py-3 text-gray-300">{item.genre}</td>
+                                    <td className="px-4 py-3 text-gray-300">{item.rating}</td>
+                                    <td className="px-4 py-3 text-gray-300">{item.year}</td>
+                                    <td className="px-4 py-3 text-gray-300">{item.userEmail}</td>
+                                    <td className="px-4 py-3">
+                                        <button
+                                            onClick={() => deleteWatchListItem(item._id)}
+                                            className="bg-red-600 hover:bg-red-700 text-white text-sm px-4 py-2 rounded-md transition"
+                                        >
+                                            Remove
+                                        </button>
+                                    </td>
+                                </tr>
+                            ))}
+                        </tbody>
+                    </table>
                 </div>
             )}
         </div>
