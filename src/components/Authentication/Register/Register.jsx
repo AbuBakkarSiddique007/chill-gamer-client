@@ -9,6 +9,7 @@ const Register = () => {
     const navigate = useNavigate();
     const [error, setError] = useState("");
     const [loading, setLoading] = useState(false);
+    const [googleLoading, setGoogleLoading] = useState(false);
 
     const handleRegisterForm = (event) => {
         event.preventDefault();
@@ -112,7 +113,7 @@ const Register = () => {
                 setError("Google sign-in failed");
             })
             .finally(() => {
-                setLoading(false);
+                setGoogleLoading(false);
             });
     };
 
@@ -141,10 +142,13 @@ const Register = () => {
 
                     <button
                         type="submit"
-                        className="w-full bg-blue-600 text-white font-semibold py-3 rounded-lg hover:bg-blue-700 transition duration-200"
+                        className="w-full flex justify-center items-center bg-blue-600 text-white font-semibold py-3 rounded-lg hover:bg-blue-700 transition duration-200"
                         disabled={loading}
                     >
-                        {loading ? "Registering..." : "Register"}
+                        {loading && (
+                            <span className="inline-block w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin mr-2"></span>
+                        )}
+                        {loading ? "Registering" : "Register"}
                     </button>
                 </form>
 
@@ -153,8 +157,14 @@ const Register = () => {
                 <button
                     type="button"
                     onClick={handleGoogleSignIn}
-                    className="w-full bg-red-500 text-white font-semibold py-3 rounded-lg hover:bg-red-600 transition duration-200"
+                    className="w-full flex justify-center items-center bg-red-500 text-white font-semibold py-3 rounded-lg hover:bg-red-600 transition duration-200"
+                    disabled={loading}
                 >
+                    {googleLoading && (
+                        <span
+                            className="inline-block w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin mr-2"
+                        ></span>
+                    )}
                     Sign in with Google
                 </button>
 
