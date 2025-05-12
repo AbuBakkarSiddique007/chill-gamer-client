@@ -33,13 +33,13 @@ const AuthProvider = ({ children }) => {
     }
 
     // for user profile management
-    // const manageUserProfile = async (name, image) => {
-    //     await updateProfile(auth.currentUser, {
-    //         displayName: name, photoURL: image
-    //     });
-    //     const updatedUser = { ...auth.currentUser, displayName: name, photoURL: image };
-    //     setUser(updatedUser);
-    // }
+    const manageUserProfile = async (name, image) => {
+        await updateProfile(auth.currentUser, {
+            displayName: name, photoURL: image
+        });
+        const updatedUser = { ...auth.currentUser, displayName: name, photoURL: image };
+        setUser(updatedUser);
+    }
 
     // for password reset
     const resetPassword = async (email) => {
@@ -67,7 +67,8 @@ const AuthProvider = ({ children }) => {
         user,
         setUser,
         loading,
-        resetPassword
+        resetPassword,
+        manageUserProfile
     }
 
     // Observe user state change

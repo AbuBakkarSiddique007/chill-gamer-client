@@ -1,6 +1,8 @@
 import { Link, useNavigate } from "react-router-dom";
 import { useContext, useState } from "react";
 import { AuthContext } from "../AuthProvider/AuthProvider";
+import Swal from 'sweetalert2';
+
 
 const Register = () => {
     const { handleRegister, handleGoogleLogin } = useContext(AuthContext);
@@ -32,6 +34,14 @@ const Register = () => {
             return;
         }
 
+        // Validate password
+        const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z]).{6,}$/;
+        if (!passwordRegex.test(password)) {
+            setError("Password must be at least 6 characters long and include both uppercase and lowercase letters.");
+            setLoading(false);
+            return;
+        }
+
         handleRegister(email, password)
             .then(() => {
                 const newUser = { name, email, photo: image };
@@ -47,6 +57,14 @@ const Register = () => {
             .then((res) => res.json())
             .then(() => {
                 form.reset();
+
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Registration Successful!',
+                    text: 'Your account has been created.',
+                    confirmButtonColor: '#3085d6',
+                });
+
                 navigate("/");
             })
             .catch((err) => {
@@ -69,7 +87,7 @@ const Register = () => {
                 const loggedInUser = {
                     email: user.email,
                     name: user.displayName,
-                    photo: user.photoURL || 'https://i.ibb.co/ZYW3VTp/brown-brim.png', // Fallback if no photoURL is provided
+                    photo: user.photoURL || 'https://i.ibb.co/ZYW3VTp/brown-brim.png',
                 };
 
                 fetch("http://localhost:5000/users", {

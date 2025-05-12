@@ -5,6 +5,8 @@ import { AuthContext } from '../Authentication/AuthProvider/AuthProvider';
 const Navbar = () => {
     const { user, handleLogout } = useContext(AuthContext);
 
+    console.log(user);
+    
     const navLinkClass = ({ isActive }) =>
         isActive ? 'text-blue-500 font-bold' : 'hover:text-[#7c3aed] transition';
 
