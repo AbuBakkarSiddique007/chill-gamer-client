@@ -1,12 +1,14 @@
 import React, { useContext } from 'react';
 import { Link, NavLink } from 'react-router-dom';
 import { AuthContext } from '../Authentication/AuthProvider/AuthProvider';
+import { Slide } from "react-awesome-reveal";
+
 
 const Navbar = () => {
     const { user, handleLogout } = useContext(AuthContext);
 
     console.log(user);
-    
+
     const navLinkClass = ({ isActive }) =>
         isActive ? 'text-blue-500 font-bold' : 'hover:text-[#7c3aed] transition';
 
@@ -29,7 +31,7 @@ const Navbar = () => {
     return (
         <div className="bg-[#0f172a] text-[#f8fafc] shadow-lg">
             <div className="navbar shadow-sm max-w-7xl mx-auto">
-              
+
                 <div className="navbar-start">
                     <div className="dropdown">
                         <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
@@ -41,15 +43,25 @@ const Navbar = () => {
                             {navLinks}
                         </ul>
                     </div>
-                    <Link className="btn btn-ghost text-xl" to="/">Chill Gamer</Link>
+                    {/* <Link className="btn btn-ghost text-xl" to="/">Chill Gamer</Link> */}
+                    <Slide direction="left">
+                        <Link className="flex justify-center items-center text-xl font-bold" to="/">
+                            <img
+                                src="/images/navLogo.png"
+                                alt="Logo"
+                                className="w-10 h-10 rounded-full mr-2"
+                            />
+                            Chill Gamer
+                        </Link>
+                    </Slide>
                 </div>
 
-                
+
                 <div className="navbar-center hidden lg:flex">
                     <ul className="menu menu-horizontal px-1">{navLinks}</ul>
                 </div>
 
-               
+
                 <div className="navbar-end space-x-3">
                     {user ? (
                         <>

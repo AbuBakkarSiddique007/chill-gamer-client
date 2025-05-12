@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Typewriter } from "react-simple-typewriter";
 
 const WishlistForm = () => {
     const [formData, setFormData] = useState({
@@ -28,7 +29,15 @@ const WishlistForm = () => {
         <section className="bg-slate-800 text-white py-24 px-6">
             <div className="max-w-xl mx-auto px-4">
                 <h2 className="text-3xl font-bold text-center mb-6 text-white">
-                    Suggest a Game to Review
+                    <Typewriter
+                        words={['Suggest a Game to Review']}
+                        loop={1}
+                        cursor
+                        cursorStyle="|"
+                        typeSpeed={70}
+                        deleteSpeed={50}
+                        delaySpeed={1000}
+                    />
                 </h2>
                 <form onSubmit={handleSubmit} className="space-y-6">
                     <input

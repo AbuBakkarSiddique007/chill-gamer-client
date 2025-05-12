@@ -20,7 +20,7 @@ const ReviewCard = ({ review }) => {
             <div className="p-4 space-y-1">
                 <h2 className="text-lg font-semibold text-white">{title}</h2>
                 <p className="text-sm text-gray-300">🎮 Genre: {genre}</p>
-                <p className="text-sm text-gray-300">⭐ Rating: {rating}/5</p>
+                <p className="text-sm text-gray-300">⭐ Rating: {rating}/10</p>
                 <p className="text-sm text-gray-300">📅 Released: {year}</p>
 
                 <Link

@@ -1,10 +1,12 @@
 import React, { useContext, useState, useEffect } from 'react';
 import { AuthContext } from '../Authentication/AuthProvider/AuthProvider';
+import Swal from 'sweetalert2';
 
 const AddReview = () => {
     const { user } = useContext(AuthContext);
     const [error, setError] = useState("");
     const [loading, setLoading] = useState(true);
+    const [submitting, setSubmitting] = useState(false);
 
     useEffect(() => {
         if (user) {
@@ -14,6 +16,13 @@ const AddReview = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
+
+        if (!user) {
+            setError("Please login to submit a review");
+            return;
+        }
+
+        setSubmitting(true);
 
         const form = e.target;
         const coverUrl = form.coverUrl.value;
@@ -25,10 +34,6 @@ const AddReview = () => {
         const userName = form.userName.value;
         const userEmail = form.userEmail.value;
 
-        if (!user) {
-            setError("Please login to submit a review");
-            return;
-        }
 
         const review = {
             coverUrl,
@@ -41,7 +46,6 @@ const AddReview = () => {
             userEmail
         };
 
-        console.log(review);
 
         fetch("http://localhost:5000/review", {
             method: "POST",
@@ -52,7 +56,31 @@ const AddReview = () => {
         })
             .then(res => res.json())
             .then(data => {
-                console.log(data);
+                if (data.insertedId) {
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Review Submitted!',
+                        text: 'Thanks for your review.',
+                        timer: 2000,
+                        showConfirmButton: false,
+                    });
+                    form.reset(); // Reset form
+                } else {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Oops...',
+                        text: 'Something went wrong!',
+                    });
+                }
+                setSubmitting(false);
+            })
+            .catch(() => {
+                setSubmitting(false);
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Error',
+                    text: 'Failed to submit review. Try again.',
+                });
             });
     };
 
@@ -131,7 +159,13 @@ const AddReview = () => {
                     </div>
 
                     <div>
-                        <button type="submit" className="btn btn-primary w-full">Submit Review</button>
+                        <button
+                            type="submit"
+                            className="btn btn-primary w-full"
+                            disabled={submitting}
+                        >
+                            {submitting ? "Submitting..." : "Submit Review"}
+                        </button>
                     </div>
                 </form>
             </div>
