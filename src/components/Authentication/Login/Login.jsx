@@ -2,12 +2,14 @@ import React, { useContext, useState } from 'react';
 import { FaGoogle } from 'react-icons/fa';
 import { NavLink, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../AuthProvider/AuthProvider';
+import Swal from 'sweetalert2';
 
 const Login = () => {
     const { handleLogin, handleGoogleLogin } = useContext(AuthContext);
     const navigate = useNavigate();
     const [error, setError] = useState("");
     const [loading, setLoading] = useState(false);
+    const [showPassword, setShowPassword] = useState(false);
 
     const handleLoginForm = (event) => {
         event.preventDefault();
@@ -17,7 +19,11 @@ const Login = () => {
         const password = form.password.value.trim();
 
         if (!email || !password) {
-            return alert("Please enter both email and password");
+            return Swal.fire({
+                icon: 'error',
+                title: 'Missing Information',
+                text: 'Please enter both email and password.',
+            });
         }
 
         setLoading(true);
@@ -44,6 +50,15 @@ const Login = () => {
                     .then(res => res.json())
                     .then(data => {
                         console.log("User info saved successfully", data);
+
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'Login Successful!',
+                            text: `Welcome back, ${user.displayName || 'User'}!`,
+                            timer: 2000,
+                            showConfirmButton: false,
+                        });
+
                         navigate("/");
                     })
                     .catch(error => {
@@ -54,12 +69,17 @@ const Login = () => {
             .catch((err) => {
                 console.error(err);
                 setError("Login failed, please try again.");
+
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Login Failed',
+                    text: 'Incorrect email or password.',
+                });
             })
             .finally(() => {
                 setLoading(false);
             });
     };
-
 
     const handleGoogleSignIn = () => {
         setLoading(true);
@@ -118,13 +138,21 @@ const Login = () => {
                             required
                         />
 
-                        <input
-                            type="password"
-                            name="password"
-                            placeholder="Password"
-                            className="w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400 text-gray-900"
-                            required
-                        />
+                        <div className="relative">
+                            <input
+                                type={showPassword ? "text" : "password"}
+                                name="password"
+                                placeholder="Password"
+                                className="w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400 text-gray-900"
+                                required
+                            />
+                            <span
+                                onClick={() => setShowPassword(!showPassword)}
+                                className="absolute right-4 top-3 text-blue-600 cursor-pointer select-none"
+                            >
+                                {showPassword ? "Hide" : "Show"}
+                            </span>
+                        </div>
 
                         {error && <p className="text-red-500 text-sm text-center">{error}</p>}
 

@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
+
 
 const UpdateReview = () => {
     const { id } = useParams();
@@ -35,11 +37,19 @@ const UpdateReview = () => {
             .then(res => res.json())
             .then(data => {
                 if (data.modifiedCount > 0) {
-                    alert("Review updated successfully!");
-                    navigate("/my-review");
+                    Swal.fire({
+                        title: "Success!",
+                        text: "Review updated successfully!",
+                        icon: "success",
+                        confirmButtonColor: "#3085d6",
+                        confirmButtonText: "OK"
+                    }).then(() => {
+                        navigate("/my-review");
+                    });
                 }
             });
     };
+
 
     if (!review) return <p className="text-center text-white py-20">Loading review...</p>;
 
