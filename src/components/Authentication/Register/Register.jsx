@@ -2,7 +2,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { useContext, useState } from "react";
 import { AuthContext } from "../AuthProvider/AuthProvider";
 import Swal from 'sweetalert2';
-
+import { FaGoogle } from 'react-icons/fa';
 
 const Register = () => {
     const { handleRegister, handleGoogleLogin } = useContext(AuthContext);
@@ -35,7 +35,6 @@ const Register = () => {
             return;
         }
 
-        // Validate password
         const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z]).{6,}$/;
         if (!passwordRegex.test(password)) {
             setError("Password must be at least 6 characters long and include both uppercase and lowercase letters.");
@@ -58,14 +57,11 @@ const Register = () => {
             .then((res) => res.json())
             .then(() => {
                 form.reset();
-
                 Swal.fire({
                     icon: 'success',
                     title: 'Registration Successful!',
                     text: 'Your account has been created.',
-                    confirmButtonColor: '#3085d6',
                 });
-
                 navigate("/");
             })
             .catch((err) => {
@@ -77,9 +73,8 @@ const Register = () => {
             });
     };
 
-    //handle Google sign-in
     const handleGoogleSignIn = () => {
-        setLoading(true);
+        setGoogleLoading(true);
         setError("");
 
         handleGoogleLogin()
@@ -100,7 +95,6 @@ const Register = () => {
                 })
                     .then(res => res.json())
                     .then(data => {
-                        console.log("Google user info saved", data);
                         navigate("/");
                     })
                     .catch(error => {
@@ -118,58 +112,87 @@ const Register = () => {
     };
 
     return (
-        <div className="flex flex-col items-center justify-center min-h-screen bg-slate-800 px-6 py-8">
-            <div className="max-w-lg w-full bg-white p-8 rounded-xl shadow-xl">
-                <h2 className="text-2xl font-bold text-center text-gray-800 mb-6">Create an Account</h2>
+        <div className="flex flex-col items-center justify-center min-h-screen px-6 py-8 bg-base-200">
+            <div className="max-w-lg w-full p-8 rounded-xl shadow-xl bg-base-100">
+                <h2 className="text-2xl font-bold text-center mb-6 text-base-content">Create an Account</h2>
                 <form onSubmit={handleRegisterForm} className="space-y-4">
                     <div>
-                        <input type="text" name="name" placeholder="Full Name" required className="w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-blue-500 text-gray-800" />
+                        <input
+                            type="text"
+                            name="name"
+                            placeholder="Full Name"
+                            required
+                            className="w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-primary border-base-content/20"
+                        />
                     </div>
                     <div>
-                        <input type="text" name="image" placeholder="Profile Image URL" className="w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-blue-500 text-gray-800" />
+                        <input
+                            type="text"
+                            name="image"
+                            placeholder="Profile Image URL"
+                            className="w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-primary border-base-content/20"
+                        />
                     </div>
                     <div>
-                        <input type="email" name="email" placeholder="Email Address" required className="w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-blue-500 text-gray-800" />
+                        <input
+                            type="email"
+                            name="email"
+                            placeholder="Email Address"
+                            required
+                            className="w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-primary border-base-content/20"
+                        />
                     </div>
                     <div>
-                        <input type="password" name="password" placeholder="Password" required className="w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-blue-500 text-gray-800" />
+                        <input
+                            type="password"
+                            name="password"
+                            placeholder="Password"
+                            required
+                            className="w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-primary border-base-content/20"
+                        />
                     </div>
                     <div>
-                        <input type="password" name="confirmPassword" placeholder="Confirm Password" required className="w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-blue-500 text-gray-800" />
+                        <input
+                            type="password"
+                            name="confirmPassword"
+                            placeholder="Confirm Password"
+                            required
+                            className="w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-primary border-base-content/20"
+                        />
                     </div>
 
-                    {error && <p className="text-red-500 text-sm mt-2">{error}</p>}
+                    {error && <p className="text-error text-sm mt-2">{error}</p>}
 
                     <button
                         type="submit"
-                        className="w-full flex justify-center items-center bg-blue-600 text-white font-semibold py-3 rounded-lg hover:bg-blue-700 transition duration-200"
+                        className="w-full btn btn-primary"
                         disabled={loading}
                     >
                         {loading && (
-                            <span className="inline-block w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin mr-2"></span>
+                            <span className="loading loading-spinner"></span>
                         )}
                         {loading ? "Registering" : "Register"}
                     </button>
                 </form>
 
-                <div className="text-center my-4 text-gray-500">OR</div>
+                <div className="text-center my-4 text-base-content/50">OR</div>
 
                 <button
                     type="button"
                     onClick={handleGoogleSignIn}
-                    className="w-full flex justify-center items-center bg-red-500 text-white font-semibold py-3 rounded-lg hover:bg-red-600 transition duration-200"
-                    disabled={loading}
+                    className="w-full btn btn-error"
+                    disabled={googleLoading}
                 >
-                    {googleLoading && (
-                        <span
-                            className="inline-block w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin mr-2"
-                        >nav</span>
+                    <FaGoogle className="mr-2" />
+                    {googleLoading ? (
+                        <span className="loading loading-spinner"></span>
+                    ) : (
+                        "Sign in with Google"
                     )}
-                    Sign in with Google
                 </button>
 
-                <p className="text-center mt-6 text-gray-700">
-                    Already have an account? <Link to="/login" className="text-blue-600 hover:underline">Login here</Link>
+                <p className="text-center mt-6 text-base-content/70">
+                    Already have an account? <Link to="/login" className="text-primary hover:underline">Login here</Link>
                 </p>
             </div>
         </div>

@@ -9,7 +9,7 @@ const WatchList = () => {
 
     useEffect(() => {
         if (user?.email) {
-            fetch(`http://localhost:5000/watchList?email=${user.email}`)
+            fetch(`https://chill-gamer-server-rosy.vercel.app/watchList?email=${user.email}`)
                 .then(res => res.json())
                 .then(data => {
                     setWatchList(data);
@@ -28,12 +28,10 @@ const WatchList = () => {
             text: "This game will be removed from your WatchList.",
             icon: "warning",
             showCancelButton: true,
-            confirmButtonColor: "#d33",
-            cancelButtonColor: "#3085d6",
             confirmButtonText: "Yes, remove it!"
         }).then((result) => {
             if (result.isConfirmed) {
-                fetch(`http://localhost:5000/watchList/${id}`, {
+                fetch(`https://chill-gamer-server-rosy.vercel.app/watchList/${id}`, {
                     method: "DELETE",
                 })
                     .then(res => res.json())
@@ -53,18 +51,18 @@ const WatchList = () => {
         });
     };
 
-    if (loading) return <p className="text-center text-gray-300 mt-10">Loading WatchList...</p>;
+    if (loading) return <p className="text-center mt-10">Loading WatchList...</p>;
 
     return (
-        <div className="p-6 mx-auto bg-slate-800 min-h-screen">
-            <h2 className="text-4xl font-bold text-center text-white mb-8">My Game WatchList</h2>
+        <div className="p-6 mx-auto min-h-screen bg-base-200">
+            <h2 className="text-4xl font-bold text-center mb-8 text-base-content">My Game WatchList</h2>
 
             {watchList.length === 0 ? (
-                <p className="text-center text-gray-400">No games in your WatchList yet.</p>
+                <p className="text-center text-base-content/70">No games in your WatchList yet.</p>
             ) : (
                 <div className="overflow-x-auto">
-                    <table className="min-w-full table-auto bg-slate-700 rounded-xl overflow-hidden shadow-md">
-                        <thead className="bg-slate-600 text-white text-left">
+                    <table className="min-w-full table-auto rounded-xl overflow-hidden shadow-md bg-base-100">
+                        <thead className="bg-primary text-primary-content text-left">
                             <tr>
                                 <th className="px-4 py-3">Cover</th>
                                 <th className="px-4 py-3">Title</th>
@@ -77,7 +75,7 @@ const WatchList = () => {
                         </thead>
                         <tbody>
                             {watchList.map(item => (
-                                <tr key={item._id} className="border-t border-slate-600 hover:bg-slate-600 transition">
+                                <tr key={item._id} className="border-t border-base-200 hover:bg-base-200 transition">
                                     <td className="px-4 py-3">
                                         <img
                                             src={item.coverUrl}
@@ -85,15 +83,15 @@ const WatchList = () => {
                                             className="w-20 h-12 object-cover rounded-md"
                                         />
                                     </td>
-                                    <td className="px-4 py-3 text-white">{item.title}</td>
-                                    <td className="px-4 py-3 text-gray-300">{item.genre}</td>
-                                    <td className="px-4 py-3 text-gray-300">{item.rating}</td>
-                                    <td className="px-4 py-3 text-gray-300">{item.year}</td>
-                                    <td className="px-4 py-3 text-gray-300">{item.userEmail}</td>
+                                    <td className="px-4 py-3 text-base-content">{item.title}</td>
+                                    <td className="px-4 py-3 text-base-content/80">{item.genre}</td>
+                                    <td className="px-4 py-3 text-base-content/80">{item.rating}</td>
+                                    <td className="px-4 py-3 text-base-content/80">{item.year}</td>
+                                    <td className="px-4 py-3 text-base-content/80">{item.userEmail}</td>
                                     <td className="px-4 py-3">
                                         <button
                                             onClick={() => deleteWatchListItem(item._id)}
-                                            className="bg-red-600 hover:bg-red-700 text-white text-sm px-4 py-2 rounded-md transition"
+                                            className="btn btn-error btn-sm"
                                         >
                                             Remove
                                         </button>

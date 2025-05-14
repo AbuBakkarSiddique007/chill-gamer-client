@@ -2,14 +2,13 @@ import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 
-
 const UpdateReview = () => {
     const { id } = useParams();
     const navigate = useNavigate();
     const [review, setReview] = useState(null);
 
     useEffect(() => {
-        fetch(`http://localhost:5000/review/${id}`)
+        fetch(`https://chill-gamer-server-rosy.vercel.app/review/${id}`)
             .then(res => res.json())
             .then(data => setReview(data));
     }, [id]);
@@ -27,7 +26,7 @@ const UpdateReview = () => {
             genre: form.genre.value,
         };
 
-        fetch(`http://localhost:5000/review/${id}`, {
+        fetch(`https://chill-gamer-server-rosy.vercel.app/review/${id}`, {
             method: "PUT",
             headers: {
                 "Content-Type": "application/json"
@@ -41,7 +40,6 @@ const UpdateReview = () => {
                         title: "Success!",
                         text: "Review updated successfully!",
                         icon: "success",
-                        confirmButtonColor: "#3085d6",
                         confirmButtonText: "OK"
                     }).then(() => {
                         navigate("/my-review");
@@ -50,79 +48,78 @@ const UpdateReview = () => {
             });
     };
 
-
-    if (!review) return <p className="text-center text-white py-20">Loading review...</p>;
+    if (!review) return <p className="text-center py-20">Loading review...</p>;
 
     return (
-        <div className="mx-auto bg-gradient-to-br from-[#1e293b] to-[#0f172a] text-white p-8  shadow-2xl">
-            <div className="max-w-3xl mx-auto bg-gradient-to-br from-[#1e293b] to-[#0f172a] text-white p-8 rounded-2xl shadow-2xl">
-                <h2 className="text-3xl font-bold mb-6 text-center">Update Your Game Review</h2>
+        <div className="mx-auto p-8 bg-base-200">
+            <div className="max-w-3xl mx-auto p-8 rounded-2xl shadow-2xl bg-base-100">
+                <h2 className="text-3xl font-bold mb-6 text-center text-base-content">Update Your Game Review</h2>
                 <form onSubmit={handleUpdate} className="space-y-5">
                     <div>
-                        <label className="block font-medium mb-1">Game Cover Image URL</label>
+                        <label className="block font-medium mb-1 text-base-content">Game Cover Image URL</label>
                         <input
                             type="url"
                             name="coverUrl"
                             defaultValue={review.coverUrl}
-                            className="input input-bordered w-full bg-[#0f172a] text-white"
+                            className="input input-bordered w-full"
                             required
                         />
                     </div>
 
                     <div>
-                        <label className="block font-medium mb-1">Game Title / Name</label>
+                        <label className="block font-medium mb-1 text-base-content">Game Title / Name</label>
                         <input
                             type="text"
                             name="title"
                             defaultValue={review.title}
-                            className="input input-bordered w-full bg-[#0f172a] text-white"
+                            className="input input-bordered w-full"
                             required
                         />
                     </div>
 
                     <div>
-                        <label className="block font-medium mb-1">Review Description</label>
+                        <label className="block font-medium mb-1 text-base-content">Review Description</label>
                         <textarea
                             name="description"
                             rows="4"
                             defaultValue={review.description}
-                            className="textarea textarea-bordered w-full bg-[#0f172a] text-white"
+                            className="textarea textarea-bordered w-full"
                             required
                         />
                     </div>
 
                     <div>
-                        <label className="block font-medium mb-1">Rating (1-10)</label>
+                        <label className="block font-medium mb-1 text-base-content">Rating (1-10)</label>
                         <input
                             type="number"
                             name="rating"
                             min="1"
                             max="10"
                             defaultValue={review.rating}
-                            className="input input-bordered w-full bg-[#0f172a] text-white"
+                            className="input input-bordered w-full"
                             required
                         />
                     </div>
 
                     <div>
-                        <label className="block font-medium mb-1">Publishing Year</label>
+                        <label className="block font-medium mb-1 text-base-content">Publishing Year</label>
                         <input
                             type="number"
                             name="year"
                             min="1980"
                             max="2099"
                             defaultValue={review.year}
-                            className="input input-bordered w-full bg-[#0f172a] text-white"
+                            className="input input-bordered w-full"
                             required
                         />
                     </div>
 
                     <div>
-                        <label className="block font-medium mb-1">Genre</label>
+                        <label className="block font-medium mb-1 text-base-content">Genre</label>
                         <select
                             name="genre"
                             defaultValue={review.genre}
-                            className="select select-bordered w-full bg-[#0f172a] text-white"
+                            className="select select-bordered w-full"
                             required
                         >
                             <option value="Action">Action</option>
@@ -136,28 +133,28 @@ const UpdateReview = () => {
 
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                         <div>
-                            <label className="block font-medium mb-1">User Name</label>
+                            <label className="block font-medium mb-1 text-base-content">User Name</label>
                             <input
                                 type="text"
                                 value={review.userName}
                                 readOnly
-                                className="input input-bordered w-full bg-gray-800 text-gray-300"
+                                className="input input-bordered w-full bg-base-200"
                             />
                         </div>
                         <div>
-                            <label className="block font-medium mb-1">User Email</label>
+                            <label className="block font-medium mb-1 text-base-content">User Email</label>
                             <input
                                 type="email"
                                 value={review.userEmail}
                                 readOnly
-                                className="input input-bordered w-full bg-gray-800 text-gray-300"
+                                className="input input-bordered w-full bg-base-200"
                             />
                         </div>
                     </div>
 
                     <button
                         type="submit"
-                        className="w-full py-3 mt-4 bg-blue-600 hover:bg-blue-700 transition rounded-xl text-white font-semibold"
+                        className="w-full py-3 mt-4 btn btn-primary"
                     >
                         Update Review
                     </button>

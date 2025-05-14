@@ -1,12 +1,17 @@
 module.exports = {
-    theme: {
-        extend: {
-            colors: {
-                primary: 'hsl(219, 40%, 15%)',  // example primary color
-                secondary: '#4caf50',  // example secondary color
-                accent: '#3f51b5',  // example accent color
-            },
-        },
-    },
-    plugins: [],
-}
+  content: ["./src/**/*.{js,jsx,ts,tsx}"],
+  theme: {
+    extend: {
+      colors: {
+        bg: 'var(--bg-color)',
+        secondary: 'var(--bg-secondary)',
+        text: 'var(--text-color)',
+        btn: 'var(--btn-bg)',
+        btnHover: 'var(--btn-hover-bg)',
+        border: 'var(--border-color)',
+        highlight: 'var(--highlight-color)',
+      }
+    }
+  },
+  plugins: [require("daisyui")],
+};

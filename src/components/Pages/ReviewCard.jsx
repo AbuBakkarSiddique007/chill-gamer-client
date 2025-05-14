@@ -11,21 +11,21 @@ const ReviewCard = ({ review }) => {
     } = review;
 
     return (
-        <div className="bg-gradient-to-r from-[#1e293b] to-[#0f172a] text-white rounded-2xl shadow-md overflow-hidden border hover:shadow-xl transition duration-300">
+        <div className="bg-base-100 rounded-2xl shadow-md overflow-hidden border border-base-content/20 hover:shadow-xl transition duration-300">
             <img
                 src={coverUrl}
                 alt={title}
-                className="w-full h-48 object-contain bg-slate-900"
+                className="w-full h-48 object-contain bg-base-300 p-2"
             />
             <div className="p-4 space-y-1">
-                <h2 className="text-lg font-semibold text-white">{title}</h2>
-                <p className="text-sm text-gray-300">🎮 Genre: {genre}</p>
-                <p className="text-sm text-gray-300">⭐ Rating: {rating}/10</p>
-                <p className="text-sm text-gray-300">📅 Released: {year}</p>
+                <h2 className="text-lg font-semibold text-base-content">{title}</h2>
+                <p className="text-sm text-base-content/70">🎮 Genre: {genre}</p>
+                <p className="text-sm text-base-content/70">⭐ Rating: {rating}/10</p>
+                <p className="text-sm text-base-content/70">📅 Released: {year}</p>
 
                 <Link
                     to={`/review/${_id}`}
-                    className="inline-block mt-3 px-4 py-2 bg-blue-600 text-white rounded-lg text-sm font-medium hover:bg-blue-700"
+                    className="inline-block mt-3 px-4 py-2 bg-primary text-primary-content rounded-lg text-sm font-medium hover:bg-primary-focus"
                 >
                     Explore Details
                 </Link>

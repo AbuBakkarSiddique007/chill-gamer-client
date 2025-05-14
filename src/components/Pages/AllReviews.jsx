@@ -38,23 +38,22 @@ const AllReviews = () => {
     }, []);
 
     return (
-        <div className="min-h-screen bg-gradient-to-r from-[#1e293b] to-[#0f172a] text-white p-8">
+        <div className="min-h-screen bg-base-200 p-8">
             <div className="relative mb-10 flex justify-center">
                 <div className="dropdown">
                     <button
                         onClick={() => setDropdownOpen(!dropdownOpen)}
-                        className="btn bg-[#1e293b] text-white hover:bg-[#334155] border border-gray-600"
+                        className="btn bg-base-300 hover:bg-base-300/90 border border-base-content/20 text-base-content"
                     >
                         Sort / Filter
                     </button>
 
                     {dropdownOpen && (
-                        <div id="dropdownMenu" className="absolute top-12 z-50 bg-[#1e293b] p-4 border border-gray-600 rounded-lg w-52">
-
+                        <div id="dropdownMenu" className="absolute top-12 z-50 bg-base-300 p-4 border border-base-content/20 rounded-lg w-52 shadow-xl">
                             <div>
                                 <button
                                     onClick={() => setActiveSubmenu(activeSubmenu === 'sort' ? null : 'sort')}
-                                    className="w-full text-left px-3 py-1 rounded hover:bg-[#334155] text-yellow-400"
+                                    className="w-full text-left px-3 py-1 rounded hover:bg-base-200 text-primary"
                                 >
                                     Sort By
                                 </button>
@@ -62,13 +61,13 @@ const AllReviews = () => {
                                     <div className="mt-1 ml-3 space-y-1">
                                         <button
                                             onClick={() => handleSort('rating')}
-                                            className="block w-full text-left px-3 py-1 rounded hover:bg-[#334155] text-blue-300"
+                                            className="block w-full text-left px-3 py-1 rounded hover:bg-base-200 text-accent"
                                         >
                                             Rating (Asc)
                                         </button>
                                         <button
                                             onClick={() => handleSort('year')}
-                                            className="block w-full text-left px-3 py-1 rounded hover:bg-[#334155] text-green-300"
+                                            className="block w-full text-left px-3 py-1 rounded hover:bg-base-200 text-secondary"
                                         >
                                             Year (Asc)
                                         </button>
@@ -76,11 +75,10 @@ const AllReviews = () => {
                                 )}
                             </div>
 
-
-                            <div>
+                            <div className="mt-2">
                                 <button
                                     onClick={() => setActiveSubmenu(activeSubmenu === 'filter' ? null : 'filter')}
-                                    className="w-full text-left px-3 py-1 rounded hover:bg-[#334155] text-purple-300"
+                                    className="w-full text-left px-3 py-1 rounded hover:bg-base-200 text-info"
                                 >
                                     Filter By Genre
                                 </button>
@@ -88,7 +86,7 @@ const AllReviews = () => {
                                     <div className="mt-1 ml-3 space-y-1 max-h-40 overflow-y-auto">
                                         <button
                                             onClick={() => handleFilter('All')}
-                                            className="block w-full text-left px-3 py-1 rounded hover:bg-[#334155] text-red-300"
+                                            className="block w-full text-left px-3 py-1 rounded hover:bg-base-200 text-error"
                                         >
                                             All
                                         </button>
@@ -96,7 +94,7 @@ const AllReviews = () => {
                                             <button
                                                 key={genre}
                                                 onClick={() => handleFilter(genre)}
-                                                className="block w-full text-left px-3 py-1 rounded hover:bg-[#334155] text-orange-300"
+                                                className="block w-full text-left px-3 py-1 rounded hover:bg-base-200 text-warning"
                                             >
                                                 {genre}
                                             </button>
@@ -109,12 +107,11 @@ const AllReviews = () => {
                 </div>
             </div>
 
-
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 {data.length > 0 ? (
                     data.map((review) => <ReviewCard key={review.id} review={review} />)
                 ) : (
-                    <div className="col-span-full text-center text-lg text-gray-400">
+                    <div className="col-span-full text-center text-lg text-base-content/70">
                         No reviews found. Try adjusting the filters or sorting options.
                     </div>
                 )}

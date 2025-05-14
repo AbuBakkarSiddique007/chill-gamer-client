@@ -9,8 +9,6 @@ const ReviewDetails = () => {
 
     const { title, genre, rating, description, year, coverUrl, userName, userEmail } = review;
 
-    console.log(review);
-
     const handleAddToWatchlist = () => {
         if (!user?.email) {
             Swal.fire("Login Required", "Please log in first.", "warning");
@@ -27,7 +25,7 @@ const ReviewDetails = () => {
             userEmail: user.email,
         };
 
-        fetch("http://localhost:5000/watchList", {
+        fetch("https://chill-gamer-server-rosy.vercel.app/watchList", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -49,10 +47,10 @@ const ReviewDetails = () => {
     };
 
     return (
-        <div className="flex justify-center items-center min-h-screen bg-slate-800 px-4 py-8">
-            <div className="max-w-5xl w-full bg-slate-700 text-white shadow-2xl rounded-xl overflow-hidden md:flex">
+        <div className="flex justify-center items-center min-h-screen px-4 py-8 bg-base-200">
+            <div className="max-w-5xl w-full bg-base-100 shadow-2xl rounded-xl overflow-hidden md:flex border border-base-content/20">
 
-                <div className="md:w-1/2">
+                <div className="md:w-1/2 bg-base-300">
                     <img
                         src={coverUrl}
                         alt={title}
@@ -60,19 +58,18 @@ const ReviewDetails = () => {
                     />
                 </div>
 
-
                 <div className="md:w-1/2 p-6 flex flex-col justify-center space-y-4">
-                    <h2 className="text-3xl font-bold">{title}</h2>
-                    <p className="text-gray-300"><span className="font-semibold">🎮 Genre:</span> {genre}</p>
-                    <p className="text-gray-300"><span className="font-semibold">⭐ Rating:</span> {rating}</p>
-                    <p className="text-gray-200"><span className="font-semibold">📝 Description:</span> {description}</p>
-                    <p className="text-sm text-gray-400">📅 Released: {year}</p>
-                    <p className="text-sm text-gray-400">👤 Reviewer: {userName || "Anonymous"}</p>
-                    <p className="text-sm text-gray-400">📧 Email: {userEmail || "N/A"}</p>
+                    <h2 className="text-3xl font-bold text-base-content">{title}</h2>
+                    <p className="text-base-content/80"><span className="font-semibold">🎮 Genre:</span> {genre}</p>
+                    <p className="text-base-content/80"><span className="font-semibold">⭐ Rating:</span> {rating}</p>
+                    <p className="text-base-content"><span className="font-semibold">📝 Description:</span> {description}</p>
+                    <p className="text-sm text-base-content/70">📅 Released: {year}</p>
+                    <p className="text-sm text-base-content/70">👤 Reviewer: {userName || "Anonymous"}</p>
+                    <p className="text-sm text-base-content/70">📧 Email: {userEmail || "N/A"}</p>
 
                     <button
                         onClick={handleAddToWatchlist}
-                        className="mt-2 bg-blue-600 hover:bg-blue-700 transition px-5 py-2 rounded-md font-medium w-fit"
+                        className="mt-2 btn btn-primary w-fit"
                     >
                         Add to WatchList
                     </button>

@@ -34,7 +34,6 @@ const AddReview = () => {
         const userName = form.userName.value;
         const userEmail = form.userEmail.value;
 
-
         const review = {
             coverUrl,
             title,
@@ -46,8 +45,7 @@ const AddReview = () => {
             userEmail
         };
 
-
-        fetch("http://localhost:5000/review", {
+        fetch("https://chill-gamer-server-rosy.vercel.app/review", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -64,7 +62,7 @@ const AddReview = () => {
                         timer: 2000,
                         showConfirmButton: false,
                     });
-                    form.reset(); // Reset form
+                    form.reset();
                 } else {
                     Swal.fire({
                         icon: 'error',
@@ -89,42 +87,74 @@ const AddReview = () => {
     }
 
     return (
-        <div className='mx-auto p-6 bg-slate-800 shadow-md text-white'>
-            <div className="max-w-2xl mx-auto p-6 bg-slate-700 shadow-md rounded-lg text-white">
-                <h2 className="text-2xl font-semibold mb-4">Add New Game Review</h2>
+        <div className='mx-auto p-6 bg-base-200'>
+            <div className="max-w-2xl mx-auto p-6 bg-base-100 shadow-md rounded-lg">
+                <h2 className="text-2xl font-semibold mb-4 text-base-content">Add New Game Review</h2>
 
-                {error && <p className="text-red-400">{error}</p>}
+                {error && <p className="text-error">{error}</p>}
 
                 <form onSubmit={handleSubmit} className="space-y-4">
-
                     <div>
-                        <label className="block font-medium text-white">Game Cover Image URL</label>
-                        <input type="url" name="coverUrl" className="input input-bordered w-full bg-white text-black" required />
+                        <label className="block font-medium text-base-content">Game Cover Image URL</label>
+                        <input
+                            type="url"
+                            name="coverUrl"
+                            className="input input-bordered w-full"
+                            required
+                        />
                     </div>
 
                     <div>
-                        <label className="block font-medium text-white">Game Title / Name</label>
-                        <input type="text" name="title" className="input input-bordered w-full bg-white text-black" required />
+                        <label className="block font-medium text-base-content">Game Title / Name</label>
+                        <input
+                            type="text"
+                            name="title"
+                            className="input input-bordered w-full"
+                            required
+                        />
                     </div>
 
                     <div>
-                        <label className="block font-medium text-white">Review Description</label>
-                        <textarea name="description" rows="4" className="textarea textarea-bordered w-full bg-white text-black" required />
+                        <label className="block font-medium text-base-content">Review Description</label>
+                        <textarea
+                            name="description"
+                            rows="4"
+                            className="textarea textarea-bordered w-full"
+                            required
+                        />
                     </div>
 
                     <div>
-                        <label className="block font-medium text-white">Rating (1-10)</label>
-                        <input type="number" name="rating" min="1" max="10" className="input input-bordered w-full bg-white text-black" required />
+                        <label className="block font-medium text-base-content">Rating (1-10)</label>
+                        <input
+                            type="number"
+                            name="rating"
+                            min="1"
+                            max="10"
+                            className="input input-bordered w-full"
+                            required
+                        />
                     </div>
 
                     <div>
-                        <label className="block font-medium text-white">Publishing Year</label>
-                        <input type="number" name="year" min="1980" max="2099" className="input input-bordered w-full bg-white text-black" required />
+                        <label className="block font-medium text-base-content">Publishing Year</label>
+                        <input
+                            type="number"
+                            name="year"
+                            min="1980"
+                            max="2099"
+                            className="input input-bordered w-full"
+                            required
+                        />
                     </div>
 
                     <div>
-                        <label className="block font-medium text-white">Genre</label>
-                        <select name="genre" className="select select-bordered w-full bg-white text-black" required>
+                        <label className="block font-medium text-base-content">Genre</label>
+                        <select
+                            name="genre"
+                            className="select select-bordered w-full"
+                            required
+                        >
                             <option value="">Select Genre</option>
                             <option value="Action">Action</option>
                             <option value="RPG">RPG</option>
@@ -137,21 +167,21 @@ const AddReview = () => {
 
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                         <div>
-                            <label className="block font-medium text-white">User Name</label>
+                            <label className="block font-medium text-base-content">User Name</label>
                             <input
                                 type="text"
                                 name="userName"
-                                className="input input-bordered w-full bg-slate-700 text-white"
+                                className="input input-bordered w-full bg-base-200"
                                 defaultValue={user?.displayName || ''}
                                 disabled
                             />
                         </div>
                         <div>
-                            <label className="block font-medium text-white">User Email</label>
+                            <label className="block font-medium text-base-content">User Email</label>
                             <input
                                 type="email"
                                 name="userEmail"
-                                className="input input-bordered w-full bg-slate-700 text-white"
+                                className="input input-bordered w-full bg-base-200"
                                 defaultValue={user?.email || ''}
                                 disabled
                             />

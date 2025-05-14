@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Typewriter } from "react-simple-typewriter";
+import Swal from 'sweetalert2';
 
 const WishlistForm = () => {
     const [formData, setFormData] = useState({
@@ -13,22 +14,31 @@ const WishlistForm = () => {
         setFormData({ ...formData, [e.target.name]: e.target.value });
     };
 
-    const handleSubmit = async (e) => {
+    const handleSubmit = (e) => {
         e.preventDefault();
-        await fetch("http://localhost:5000/wishlist", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(formData),
-        });
 
-        alert("Game suggestion submitted!");
-        setFormData({ title: "", genre: "", year: "", userEmail: "" });
+        if (formData.title && formData.genre && formData.year) {
+            Swal.fire({
+                title: 'Success!',
+                text: 'Thanks for your game suggestion! (This is a demo)',
+                icon: 'success',
+                confirmButtonText: 'OK'
+            });
+            setFormData({ title: "", genre: "", year: "", userEmail: "" });
+        } else {
+            Swal.fire({
+                title: 'Oops...',
+                text: 'Please fill in all required fields',
+                icon: 'warning',
+                confirmButtonText: 'OK'
+            });
+        }
     };
 
     return (
-        <section className="bg-slate-800 text-white py-24 px-6">
+        <section className="bg-base-200 py-24 px-6">
             <div className="max-w-xl mx-auto px-4">
-                <h2 className="text-3xl font-bold text-center mb-6 text-white">
+                <h2 className="text-3xl font-bold text-center mb-6 text-base-content">
                     <Typewriter
                         words={['Suggest a Game to Review']}
                         loop={1}
@@ -43,39 +53,41 @@ const WishlistForm = () => {
                     <input
                         name="title"
                         type="text"
-                        placeholder="Game Title"
+                        placeholder="Game Title *"
                         value={formData.title}
                         onChange={handleChange}
-                        className="w-full bg-slate-100 text-gray-800 border border-gray-300 p-4 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-600 shadow-md transition duration-300"
+                        className="w-full input input-bordered focus:ring-2 focus:ring-primary"
                         required
                     />
                     <input
                         name="genre"
                         type="text"
-                        placeholder="Genre"
+                        placeholder="Genre *"
                         value={formData.genre}
                         onChange={handleChange}
-                        className="w-full bg-slate-100 text-gray-800 border border-gray-300 p-4 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-600 shadow-md transition duration-300"
+                        className="w-full input input-bordered focus:ring-2 focus:ring-primary"
+                        required
                     />
                     <input
                         name="year"
                         type="text"
-                        placeholder="Expected Release Year"
+                        placeholder="Expected Release Year *"
                         value={formData.year}
                         onChange={handleChange}
-                        className="w-full bg-slate-100 text-gray-800 border border-gray-300 p-4 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-600 shadow-md transition duration-300"
+                        className="w-full input input-bordered focus:ring-2 focus:ring-primary"
+                        required
                     />
                     <input
                         name="userEmail"
                         type="email"
-                        placeholder="Your Email (optional)"
+                        placeholder="Your Email "
                         value={formData.userEmail}
                         onChange={handleChange}
-                        className="w-full bg-slate-100 text-gray-800 border border-gray-300 p-4 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-600 shadow-md transition duration-300"
+                        className="w-full input input-bordered focus:ring-2 focus:ring-primary"
                     />
                     <button
                         type="submit"
-                        className="bg-blue-600 text-white w-full p-4 rounded-lg hover:bg-blue-700 transition duration-300 focus:outline-none focus:ring-2 focus:ring-blue-600"
+                        className="w-full btn btn-primary"
                     >
                         Submit Suggestion
                     </button>
