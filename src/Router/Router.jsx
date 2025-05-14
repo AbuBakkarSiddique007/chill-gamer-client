@@ -33,7 +33,7 @@ export const router = createBrowserRouter([
             {
                 path: "/all-reviews",
                 element: <AllReviews></AllReviews>,
-                loader: () => fetch("http://localhost:5000/reviews")
+                loader: () => fetch("https://chill-gamer-server-rosy.vercel.app/reviews")
             },
             {
                 path: "/my-review",
@@ -67,7 +67,7 @@ export const router = createBrowserRouter([
             {
                 path: "review/:id",
                 element: <ReviewDetails></ReviewDetails>,
-                loader: ({ params }) => fetch(`http://localhost:5000/review/${params.id}`)
+                loader: ({ params }) => fetch(`https://chill-gamer-server-rosy.vercel.app/review/${params.id}`)
                     .then(res => res.json())
                     .catch(error => {
                         console.error('Error fetching review:', error);

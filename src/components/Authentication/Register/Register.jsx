@@ -46,7 +46,7 @@ const Register = () => {
             .then(() => {
                 const newUser = { name, email, photo: image };
 
-                return fetch("http://localhost:5000/users", {
+                return fetch("https://chill-gamer-server-rosy.vercel.app/users", {
                     method: "PUT",
                     headers: {
                         "Content-Type": "application/json"
@@ -86,7 +86,7 @@ const Register = () => {
                     photo: user.photoURL || 'https://i.ibb.co/ZYW3VTp/brown-brim.png',
                 };
 
-                fetch("http://localhost:5000/users", {
+                fetch("https://chill-gamer-server-rosy.vercel.app/users", {
                     method: "PUT",
                     headers: {
                         'Content-Type': 'application/json',

@@ -40,7 +40,7 @@ const Login = () => {
                     photo: user.photoURL,
                 };
 
-                fetch("http://localhost:5000/users", {
+                fetch("https://chill-gamer-server-rosy.vercel.app/users", {
                     method: "PUT",
                     headers: {
                         'Content-Type': 'application/json',
@@ -91,7 +91,7 @@ const Login = () => {
                     photo: user.photoURL,
                 };
 
-                fetch("http://localhost:5000/users", {
+                fetch("https://chill-gamer-server-rosy.vercel.app/users", {
                     method: "PUT",
                     headers: {
                         'Content-Type': 'application/json',
