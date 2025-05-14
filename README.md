@@ -3,6 +3,7 @@
 **Chill Gamer** is a game review platform where users can explore game reviews, share their own opinions, and manage their personal review dashboard. Authentication is integrated using Firebase, allowing users to log in with email/password or Google.
 
 🔗 **Live Site:** [https://chill-gamer-9b4ae.web.app/](https://chill-gamer-9b4ae.web.app/)
+🔗 **Live Site (Vercel):** [https://chill-gamer-server-rosy.vercel.app/](https://chill-gamer-server-rosy.vercel.app/)
 
 ---
 
