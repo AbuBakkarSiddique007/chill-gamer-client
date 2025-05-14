@@ -1,12 +1,34 @@
-# React + Vite
+# 🎮 Chill Gamer
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+**Chill Gamer** is a game review platform where users can explore game reviews, share their own opinions, and manage their personal review dashboard. Authentication is integrated using Firebase, allowing users to log in with email/password or Google.
 
-Currently, two official plugins are available:
+🔗 **Live Site:** [https://chill-gamer-9b4ae.web.app/](https://chill-gamer-9b4ae.web.app/)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+---
 
-## Expanding the ESLint configuration
+## 🚀 Features
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+- 🔍 Browse all game reviews shared by users.
+- ✍️ Add your own review with rating, description, and year.
+- 🔐 Authentication system using Firebase (Email/Password + Google Sign-In).
+- 👤 Logged-in users can view and manage *only* their own reviews.
+- 💅 Fully responsive UI with **Tailwind CSS** and **DaisyUI**.
+
+---
+
+## 🛠️ Tools & Technologies
+
+- **React JS**
+- **React Router**
+- **Firebase Authentication**
+- **Tailwind CSS**
+- **DaisyUI**
+- **Node.js**, **Express.js**, **MongoDB**
+
+---
+
+## 🔗 Repositories
+
+- **Client-side GitHub Repo:** [https://github.com/AbuBakkarSiddique007/chill-gamer-client.git](https://github.com/AbuBakkarSiddique007/chill-gamer-client.git)
+- **Server-side GitHub Repo:** [https://github.com/AbuBakkarSiddique007/chill-gamer-server.git](https://github.com/AbuBakkarSiddique007/chill-gamer-server.git)
+
